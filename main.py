@@ -27,9 +27,12 @@ while True:
         break
 
     res = client.query(values['-INPUT-'])
-    wolframalpha_res = next(res.results).text
-    wiki_res = wikipedia.summary(values['-INPUT-'], sentences=1)
-    sg.popup("Wolframalpha Result for " + values['-INPUT-'] + ":\n" + wolframalpha_res, "Wikipedia Result for "+ values['-INPUT-'] + ":\n" + wiki_res)
+    try:
+        wolframalpha_res = next(res.results).text
+        sg.popup("Wolframalpha Result for " + values['-INPUT-'] + ":\n" + wolframalpha_res)
+    except:
+        wiki_res = wikipedia.summary(values['-INPUT-'], sentences=1)
+        sg.popup("Wikipedia Result for " + values['-INPUT-'] + ":\n" + wiki_res)
 
 
 # Finish up by removing from the screen
